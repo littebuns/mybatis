@@ -1,7 +1,9 @@
 package com.example.mybatisplus.service;
 
-import com.example.mybatisplus.entity.User;
+import com.example.mybatisplus.model.entity.User;
 import com.baomidou.mybatisplus.extension.service.IService;
+
+import java.util.List;
 
 /**
  * <p>
@@ -13,4 +15,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface UserService extends IService<User> {
 
+    List<User> list(User user);
 }

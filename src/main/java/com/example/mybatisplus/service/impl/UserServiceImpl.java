@@ -1,10 +1,13 @@
 package com.example.mybatisplus.service.impl;
 
-import com.example.mybatisplus.entity.User;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.example.mybatisplus.model.entity.User;
 import com.example.mybatisplus.mapper.UserMapper;
 import com.example.mybatisplus.service.UserService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * <p>
@@ -17,4 +20,10 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements UserService {
 
+    @Override
+    public List<User> list(User user) {
+
+        return this.list(new QueryWrapper<>(user));
+
+    }
 }
