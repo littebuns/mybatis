@@ -1,13 +1,18 @@
 package com.example.mybatisplus.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.example.mybatisplus.model.entity.User;
 import com.example.mybatisplus.mapper.UserMapper;
 import com.example.mybatisplus.service.UserService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+
+
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 
 /**
  * <p>
@@ -22,8 +27,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
     @Override
     public List<User> list(User user) {
-
-        return this.list(new QueryWrapper<>(user));
-
+        return lambdaQuery().eq(Objects.nonNull(user.getId()), User::getId, user.getId())
+                .gt(Objects.nonNull(user.getAge()), User::getAge, user.getAge())
+                .list();
     }
 }

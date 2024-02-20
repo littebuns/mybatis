@@ -1,6 +1,6 @@
 package com.example.mybatisplus.config;
 
-import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;
+import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -12,8 +12,8 @@ public class MybatisPlusConfiguration {
      * @return
      */
     @Bean
-    public PaginationInterceptor paginationInterceptor(){
-        return new PaginationInterceptor();
+    public MybatisPlusInterceptor paginationInterceptor(){
+        return new MybatisPlusInterceptor();
     }
 
 }
