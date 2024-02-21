@@ -1,14 +1,16 @@
 package com.example.mybatisplus.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.metadata.OrderItem;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.example.mybatisplus.model.VO.UserVO;
+import com.example.mybatisplus.model.common.PageRequestModel;
 import com.example.mybatisplus.model.entity.User;
 import com.example.mybatisplus.mapper.UserMapper;
 import com.example.mybatisplus.service.UserService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 
 
+import com.example.mybatisplus.utils.MybatisPlusUtil;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -33,11 +35,12 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     }
 
     @Override
-    public Page<User> pageList(User user) {
-        QueryWrapper<User> queryWrapper = new QueryWrapper<>(user);
-        Page<User> page = new Page<>(1, 2);
-        page.addOrder(new OrderItem("age", false));
-        return this.page(page, queryWrapper);
+    public Page<UserVO> pageList(PageRequestModel<User> user) {
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>(user.getModel());
+        Page<User> page = user.getMpPage();
+        Page<User> userPage = this.page(page, queryWrapper);
+        return MybatisPlusUtil.convertVO(userPage, UserVO.class);
+
     }
 
 }

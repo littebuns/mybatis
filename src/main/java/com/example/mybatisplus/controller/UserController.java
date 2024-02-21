@@ -2,6 +2,8 @@ package com.example.mybatisplus.controller;
 
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.example.mybatisplus.model.VO.UserVO;
+import com.example.mybatisplus.model.common.PageRequestModel;
 import com.example.mybatisplus.model.entity.User;
 import com.example.mybatisplus.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -44,7 +46,7 @@ public class UserController {
 
     @PostMapping("/pageList")
     @Operation(summary = "分页查询用户")
-    public Page<User> pageList(@RequestBody User user){
+    public Page<UserVO> pageList(@RequestBody PageRequestModel<User> user){
         return userService.pageList(user);
     }
 
