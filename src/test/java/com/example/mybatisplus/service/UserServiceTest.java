@@ -26,5 +26,6 @@ class UserServiceTest {
                 .le("age","23");
         List<User> list = userService.list(queryWrapper);
         System.out.println(list);
+
     }
 }

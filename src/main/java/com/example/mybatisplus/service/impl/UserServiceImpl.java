@@ -1,12 +1,12 @@
 package com.example.mybatisplus.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.toolkit.StringUtils;
+import com.baomidou.mybatisplus.core.metadata.OrderItem;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.mybatisplus.model.entity.User;
 import com.example.mybatisplus.mapper.UserMapper;
 import com.example.mybatisplus.service.UserService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 
 
 import org.springframework.stereotype.Service;
@@ -31,4 +31,13 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
                 .gt(Objects.nonNull(user.getAge()), User::getAge, user.getAge())
                 .list();
     }
+
+    @Override
+    public Page<User> pageList(User user) {
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>(user);
+        Page<User> page = new Page<>(1, 2);
+        page.addOrder(new OrderItem("age", false));
+        return this.page(page, queryWrapper);
+    }
+
 }
